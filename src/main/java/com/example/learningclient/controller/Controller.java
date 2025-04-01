@@ -1,5 +1,6 @@
 package com.example.learningclient.controller;
 
+import com.example.learningclient.data.CardEntity;
 import com.example.learningclient.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
