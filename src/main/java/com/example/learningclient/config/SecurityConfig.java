@@ -2,6 +2,7 @@ package com.example.learningclient.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,6 +16,6 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests((requests) -> requests
                 .anyRequest()
                 .permitAll())
-                .csrf().disable().build();
+                .csrf(Customizer.withDefaults()).build();
     }
 }
