@@ -28,7 +28,7 @@ public class CardServiceImpl implements CardService{
         Map<String, Object> input = new HashMap<>();
         input.put("pan", pan);
         try {
-            response = securedRestTemplate.build().getForObject(learningServerProperties.getBaseUrl() + "/get-card-by-pan", CardEntity.class, input);
+            response = securedRestTemplate.build().getForObject(learningServerProperties.getBaseUrl() + "/get-card-by-pan?pan={pan}", CardEntity.class, input);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

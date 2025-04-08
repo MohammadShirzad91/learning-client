@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "server.ssl")
+@ConfigurationProperties(prefix = "client")
 public class SecurityProperties {
     private String trustStore;
     private String trustStorePassword;
