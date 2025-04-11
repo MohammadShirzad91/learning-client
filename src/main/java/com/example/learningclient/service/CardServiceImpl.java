@@ -2,6 +2,7 @@ package com.example.learningclient.service;
 
 import com.example.learningclient.data.CardEntity;
 import com.example.learningclient.properties.LearningServerProperties;
+import com.example.learningclient.provider.LearningServerFeignClient;
 import com.example.learningclient.security.SecuredRestTemplate;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,12 @@ import java.util.Map;
 public class CardServiceImpl implements CardService{
     private final SecuredRestTemplate securedRestTemplate;
     private final LearningServerProperties learningServerProperties;
+    private final LearningServerFeignClient feignClient;
 
-    public CardServiceImpl(SecuredRestTemplate securedRestTemplate, LearningServerProperties learningServerProperties) {
+    public CardServiceImpl(SecuredRestTemplate securedRestTemplate, LearningServerProperties learningServerProperties, LearningServerFeignClient feignClient) {
         this.securedRestTemplate = securedRestTemplate;
         this.learningServerProperties = learningServerProperties;
+        this.feignClient = feignClient;
     }
 
     @Override
@@ -25,10 +28,8 @@ public class CardServiceImpl implements CardService{
     @Override
     public CardEntity getCardByPan(String pan) {
         CardEntity response;
-        Map<String, Object> input = new HashMap<>();
-        input.put("pan", pan);
         try {
-            response = securedRestTemplate.build().getForObject(learningServerProperties.getBaseUrl() + "/get-card-by-pan?pan={pan}", CardEntity.class, input);
+            response = feignClient.getCardByPan(pan);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

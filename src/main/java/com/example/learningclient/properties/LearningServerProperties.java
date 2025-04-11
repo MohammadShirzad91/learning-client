@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix = "learning.server")
+@ConfigurationProperties(prefix = "learning-server")
 public class LearningServerProperties {
     private String baseUrl;
 }
